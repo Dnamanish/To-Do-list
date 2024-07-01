@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>To do List</title>
+    <link rel="stylesheet" href="2202901550045.css" />
+  </head>
+  <body>
+    <div class="main">
+      <p id="heading">ToDo List</p>
+      <div class="upper">
+        <input type="text" id="inputtype" />
+        <button onclick="pushdata()">ADD</button>
+      </div>
+      <p id="Display1"></p>
+    </div>
+    <script>
+      var todoList = [];
+
+      function pushdata() {
+        var inputVal = document.getElementById("inputtype").value;
+
+        if (inputVal !== "") {
+          todoList.push(inputVal);
+
+          document.getElementById("inputtype").value = "";
+
+          displayTodo();
+        }
+      }
+
+      function displayTodo() {
+        var displayDiv = document.getElementById("Display1");
+
+        displayDiv.innerHTML = "";
+
+        var ul = document.createElement("ul");
+
+        for (var i = 0; i < todoList.length; i++) {
+          var li = document.createElement("li");
+
+          li.textContent = todoList[i];
+
+          li.addEventListener("click", function () {
+            todoList.splice(todoList.indexOf(li.textContent), 1);
+
+            displayTodo();
+          });
+
+          ul.appendChild(li);
+        }
+        displayDiv.appendChild(ul);
+      }
+      window.onload = displayTodo;
+    </script>
+  </body>
+</html>
